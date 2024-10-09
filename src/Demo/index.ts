@@ -1,7 +1,8 @@
 import express from 'express'
-import { demoUserRoutes } from './routes/userRoute';
+import { demoUserRoutes } from './users/userRoute'; 
 
 const app = express();
+
 app.use(express.json());
 
 const PORT = 3000
