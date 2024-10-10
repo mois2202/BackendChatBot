@@ -8,7 +8,7 @@ const sequelize = new Sequelize('mydb', 'postgres', 'password', {
   logging: false, // Para deshabilitar logs de las consultas SQL
 });
 
-sequelize.sync({ force: false }) // { force: true } para recrear las tablas (elimina y crea nuevamente)
+sequelize.sync({ force: true }) // { force: true } para recrear las tablas (elimina y crea nuevamente)
   .then(() => {
     console.log('Tablas sincronizadas correctamente.');
   })

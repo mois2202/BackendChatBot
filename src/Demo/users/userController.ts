@@ -1,68 +1,85 @@
 import { Request, Response } from 'express';
-import userService from './userService';
+// import userService from './userService'; // Este sería el servicio que interactúa con la base de datos
 
-class UserController {
-    // Create a new user
-    async createUser(req: Request, res: Response) {
-        try {
-            const user = await userService.createUser(req.body);
-            res.status(201).json(user);
-        } catch (error) {
+const createUser = async (_req: Request, res: Response) => {
+    try {
+        // const user = await userService.createUser(req.body); // Suponiendo que `userService.createUser` maneje la lógica de creación
+        // res.status(201).json(user);
+    } catch (error) {
+        if (error instanceof Error) {
             res.status(500).json({ message: error.message });
+        } else {
+            res.status(500).json({ message: 'Error desconocido' });
         }
     }
+};
 
-    // Get all users
-    async getAllUsers(req: Request, res: Response) {
-        try {
-            const users = await userService.getAllUsers();
-            res.status(200).json(users);
-        } catch (error) {
+const getAllUsers = async (_: Request, res: Response) => {
+    try {
+        console.log('Test de endpoint')
+        // const users = await userService.getAllUsers();
+        // res.status(200).json(users);
+    } catch (error) {
+        if (error instanceof Error) {
             res.status(500).json({ message: error.message });
+        } else {
+            res.status(500).json({ message: 'Error desconocido' });
         }
     }
+};
 
-    // Get a user by ID
-    async getUserById(req: Request, res: Response) {
-        try {
-            const user = await userService.getUserById(req.params.id);
-            if (user) {
-                res.status(200).json(user);
-            } else {
-                res.status(404).json({ message: 'User not found' });
-            }
-        } catch (error) {
+const getUserById = async (_req: Request, res: Response) => {
+    try {
+        // const user = await userService.getUserById(req.params.id);
+        // if (!user) {
+        //     return res.status(404).json({ message: 'Usuario no encontrado' });
+        // }
+        // res.status(200).json(user);
+    } catch (error) {
+        if (error instanceof Error) {
             res.status(500).json({ message: error.message });
+        } else {
+            res.status(500).json({ message: 'Error desconocido' });
         }
     }
+};
 
-    // Update a user by ID
-    async updateUser(req: Request, res: Response) {
-        try {
-            const updatedUser = await userService.updateUser(req.params.id, req.body);
-            if (updatedUser) {
-                res.status(200).json(updatedUser);
-            } else {
-                res.status(404).json({ message: 'User not found' });
-            }
-        } catch (error) {
+const updateUser = async (_req: Request, res: Response) => {
+    try {
+        // const updatedUser = await userService.updateUser(req.params.id, req.body);
+        // if (!updatedUser) {
+        //     return res.status(404).json({ message: 'Usuario no encontrado' });
+        // }
+        // res.status(200).json(updatedUser);
+    } catch (error) {
+        if (error instanceof Error) {
             res.status(500).json({ message: error.message });
+        } else {
+            res.status(500).json({ message: 'Error desconocido' });
         }
     }
+};
 
-    // Delete a user by ID
-    async deleteUser(req: Request, res: Response) {
-        try {
-            const deletedUser = await userService.deleteUser(req.params.id);
-            if (deletedUser) {
-                res.status(200).json({ message: 'User deleted' });
-            } else {
-                res.status(404).json({ message: 'User not found' });
-            }
-        } catch (error) {
+const deleteUser = async (_req: Request, res: Response) => {
+    try {
+        // const deleted = await userService.deleteUser(req.params.id);
+        // if (!deleted) {
+        //     return res.status(404).json({ message: 'Usuario no encontrado' });
+        // }
+        // res.status(200).json({ message: 'Usuario eliminado correctamente' });
+    } catch (error) {
+        if (error instanceof Error) {
             res.status(500).json({ message: error.message });
+        } else {
+            res.status(500).json({ message: 'Error desconocido' });
         }
     }
-}
+};
 
-export default new UserController();
+export default {
+    createUser,
+    getAllUsers,
+    getUserById,
+    updateUser,
+    deleteUser
+};
