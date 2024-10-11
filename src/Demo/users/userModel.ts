@@ -1,10 +1,18 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model} from 'sequelize';
+import { IUser, IUserCreation} from './UsersInterfacesTypes/IUser';
 import sequelize from '../config/database';
 
 
-class User extends Model {}
+class UserModel extends Model<IUser, IUserCreation> implements IUser {
+  public id!: number;
+  public name!: string;
+  public email!: string;
+  public password!: string;
+  public role!: 'admin' | 'employee' | 'seller';
+  public created_at!: Date;
+}
 
-User.init({
+UserModel.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -38,4 +46,4 @@ User.init({
   timestamps: false,
 });
 
-export default User;
+export default UserModel;
