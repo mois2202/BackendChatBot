@@ -3,6 +3,7 @@ import UserRepository from './userRepository';
 import UserModel from '../models/userModel';
 
 export class UserService {
+    
     private userRepository: UserRepository;
 
     constructor() {

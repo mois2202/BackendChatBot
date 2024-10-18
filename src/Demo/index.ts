@@ -12,9 +12,12 @@ const PORT = 3000
 app.use('/Demo', demoUserRoutes);
 
 
-const main = () => {
+const main = async () => {
     try {
-        sequelize.sync({force: true});
+        await sequelize.authenticate();
+        console.log("Connection to database established successfully.");
+        await sequelize.sync({force: true});
+
         app.listen(PORT, () => {
         console.log(`Server in ready on port ${PORT}`);
         })
