@@ -1,4 +1,4 @@
-import { IUser, UserWithoutPassword, IUserCreation } from './UsersInterfacesTypes/IUser';
+import { IUser, UserWithoutPassword, IUserCreation } from './userInterfaces-Types';
 import UserRepository from './userRepository';
 import UserModel from '../models/userModel';
 

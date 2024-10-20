@@ -1,5 +1,5 @@
 import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique } from 'sequelize-typescript';
-import { IUser, IUserCreation } from '../users/UsersInterfacesTypes/IUser';
+import { IUser, IUserCreation, UserRole } from '../users/userInterfaces-Types';
 
 // Usamos el decorador @Table para indicar que es una tabla de la base de datos
 @Table({
@@ -38,10 +38,13 @@ class UserModel extends Model<IUser, IUserCreation> implements IUser {
 
   // Definimos el campo `role` con un ENUM para tipos de usuario
   @Column({
-    type: DataType.ENUM('admin', 'employee', 'seller'),
+    type: DataType.INTEGER,
     allowNull: false,
+    validate: {
+      isIn: [[...Object.values(UserRole)]],  // Validamos que el valor esté dentro del rango de UserRole
+    }
   })
-  public role!: 'admin' | 'employee' | 'seller';
+  public role!: UserRole;
 
   // Definimos el campo `created_at` con un valor predeterminado de la fecha actual
   @Column({

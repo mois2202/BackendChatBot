@@ -7,9 +7,15 @@ export interface IUser {
     name: string;
     email: string;
     password: string;
-    role: 'admin' | 'employee' | 'seller';
+    role: UserRole;
     created_at: Date;  
   }
+
+  export enum UserRole {
+    Admin = '1',
+    Employee = '2',
+    Seller = '3',
+  };
 
   // Type que omite la contraseña
 export type UserWithoutPassword = Omit<IUser, 'password'>;

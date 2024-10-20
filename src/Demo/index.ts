@@ -1,5 +1,5 @@
 import express from 'express'
-import sequelize from './db-connection';
+import sequelize from './shared/db/dbConnection';
 import { demoUserRoutes } from './users/userRoute';
 
 const app = express();
