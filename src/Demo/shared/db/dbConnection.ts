@@ -1,10 +1,13 @@
-import { Sequelize } from "sequelize-typescript";
+import {Sequelize} from "sequelize-typescript";
 import config from "./dbConfig";
+import { models } from "../../models";
 
 const sequelize = new Sequelize({
   ...config.getDatabaseConfig(),
   dialect: "postgres",
-  models: [__dirname + "/models"],
+  models,
+
 });
+
 
 export default sequelize;

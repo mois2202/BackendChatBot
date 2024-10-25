@@ -1,33 +1,39 @@
-import { Model, DataTypes } from 'sequelize';
-import sequelize from '../config/database'; 
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
+import { ICategory, ICategoryCreation } from './categoryInterfaces-Types';
 
-class Category extends Model {}
+@Table({
+  tableName: 'categories',  // Nombre de la tabla en la base de datos
+  timestamps: false,        // Si no tienes columnas `createdAt` y `updatedAt`
+})
+class CategoryModel extends Model<ICategory, ICategoryCreation> implements ICategory {
 
-Category.init({
-  category_id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-  },
-  category_name: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-  },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: true, // Campo opcional
-  },
-  created_at: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW, // Establece la fecha y hora actual por defecto
-  },
-}, {
-  sequelize, // Instancia de Sequelize importada
-  modelName: 'Category',
-  tableName: 'categories', // Especifica el nombre de la tabla si es necesario
-  timestamps: false, // Deshabilita timestamps automáticos (createdAt, updatedAt)
-});
+  // Definimos el campo `category_id` como llave primaria y autoincremental
+  @PrimaryKey
+  @AutoIncrement
+  @Column(DataType.INTEGER)
+  public id!: number;
 
-export default Category;
+  // Definimos el campo `category_name` como una columna obligatoria con longitud máxima de 100
+  @Column({
+    type: DataType.STRING(100),
+    allowNull: false,
+  })
+  public category_name!: string;
+
+  // Definimos el campo `description` como una columna opcional de tipo texto
+  @Column({
+    type: DataType.TEXT,
+    allowNull: true,
+  })
+  public description?: string;
+
+  // Definimos el campo `created_at` con un valor predeterminado de la fecha actual
+  @Column({
+    type: DataType.DATE,
+    allowNull: false,
+    defaultValue: DataType.NOW,
+  })
+  public created_at!: Date;
+}
+
+export default CategoryModel;

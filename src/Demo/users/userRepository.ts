@@ -1,5 +1,5 @@
 import { IUser, UserWithoutPassword, IUserCreation } from './userInterfaces-Types';
-import UserModel from '../models/userModel';
+import UserModel from './userModel';
 
 export default class UserRepository{
     

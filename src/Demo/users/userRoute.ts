@@ -1,9 +1,11 @@
 import { Router } from 'express';
-import userController from './userController';
+import UserController from './userController';
 import { schemaValidator } from '../shared/auth/schemaValidatorMiddleware';
 import { creationUserSchema } from './usersSchemas/userSchema';
 
 const router = Router();
+
+const userController = new UserController();
 
 // Create a new user
 router.post('/users', schemaValidator(creationUserSchema) ,userController.createUser);

@@ -1,8 +1,8 @@
 import { IUser, UserWithoutPassword, IUserCreation } from './userInterfaces-Types';
 import UserRepository from './userRepository';
-import UserModel from '../models/userModel';
+import UserModel from './userModel';
 
-export class UserService {
+export default class UserService {
     
     private userRepository: UserRepository;
 
@@ -41,5 +41,3 @@ export class UserService {
         return isDeleted;
     }
 }
-
-export default new UserService();

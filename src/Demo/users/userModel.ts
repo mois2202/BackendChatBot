@@ -1,5 +1,5 @@
 import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique } from 'sequelize-typescript';
-import { IUser, IUserCreation, UserRole } from '../users/userInterfaces-Types';
+import { IUser, IUserCreation, UserRole } from './userInterfaces-Types';
 
 // Usamos el decorador @Table para indicar que es una tabla de la base de datos
 @Table({
