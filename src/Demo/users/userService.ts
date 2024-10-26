@@ -1,13 +1,13 @@
-import { IUser, UserWithoutPassword, IUserCreation } from './userInterfaces-Types';
-import UserRepository from './userRepository';
+import { User, UserWithoutPassword, IUserCreation, IUserRepository, IUserService } from './userInterfaces-Types';
+
 import UserModel from './userModel';
 
-export default class UserService {
+export default class UserService implements IUserService {
     
-    private userRepository: UserRepository;
+    private userRepository: IUserRepository;
 
-    constructor() {
-        this.userRepository = new UserRepository();
+    constructor(userRepository: IUserRepository) {
+        this.userRepository = userRepository;
     }
 
     // Servicio para crear un usuario
@@ -29,7 +29,7 @@ export default class UserService {
     }
 
     // Servicio para actualizar un usuario por su ID
-    public async updateUser(id: number, updatedData: Partial<IUser>): Promise<UserModel | null> {
+    public async updateUser(id: number, updatedData: Partial<User>): Promise<UserModel | null> {
         const user = await this.userRepository.updateUser(id, updatedData);
 
         return user;

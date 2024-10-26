@@ -1,7 +1,7 @@
-import { IUser, UserWithoutPassword, IUserCreation } from './userInterfaces-Types';
+import { User, UserWithoutPassword, IUserCreation, IUserRepository } from './userInterfaces-Types';
 import UserModel from './userModel';
 
-export default class UserRepository{
+export default class UserRepository implements IUserRepository {
     
     async createUser(userDTO: IUserCreation): Promise<UserModel> {
     const user = await UserModel.create({
@@ -14,9 +14,7 @@ export default class UserRepository{
 }
 
 async getAllUsersWithoutPassword() : Promise<UserWithoutPassword[]> {
-
-    const users: IUser[] = await UserModel.findAll();
-
+    const users: User[] = await UserModel.findAll();
     // Mapeamos los usuarios a la interfaz `IUserWithoutPassword`, omitiendo el campo `password`
     const usersWithoutPassword: UserWithoutPassword[] = users.map(user => ({
         id: user.id,
@@ -30,7 +28,7 @@ async getAllUsersWithoutPassword() : Promise<UserWithoutPassword[]> {
 
 
 async getUserWithoutPassword (id: number): Promise<UserWithoutPassword | null> {
-    const user : IUser | null = await UserModel.findByPk(id);
+    const user : User | null = await UserModel.findByPk(id);
 
     if (!user) return null;
     const userWithoutPassword: UserWithoutPassword = {
@@ -44,7 +42,7 @@ async getUserWithoutPassword (id: number): Promise<UserWithoutPassword | null> {
     return userWithoutPassword;
 }
 
-async updateUser(id: number, updatedData: Partial<IUser>): Promise<UserModel | null>{
+async updateUser(id: number, updatedData: Partial<User>): Promise<UserModel | null>{
     const user = await UserModel.findByPk(id);
 
     if (!user) {

@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
-import UserService from './userService';
+import { IUserService } from './userInterfaces-Types';
 
 export default class UserController {
-    private userService: UserService;
 
-    constructor() {
-        this.userService = new UserService();
+    private userService: IUserService;
+
+    constructor(userService: IUserService) {
+        this.userService = userService;
     }
 
     createUser = async (req: Request, res: Response) => {

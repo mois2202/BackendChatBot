@@ -1,11 +1,15 @@
 import { Router } from 'express';
 import UserController from './userController';
+import UserService from './userService';
+import UserRepository from './userRepository';
 import { schemaValidator } from '../shared/auth/schemaValidatorMiddleware';
 import { creationUserSchema } from './usersSchemas/userSchema';
 
 const router = Router();
 
-const userController = new UserController();
+const userRepository = new UserRepository();
+const userService = new UserService(userRepository); 
+const userController = new UserController(userService);
 
 // Create a new user
 router.post('/users', schemaValidator(creationUserSchema) ,userController.createUser);
