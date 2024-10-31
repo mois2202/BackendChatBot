@@ -1,5 +1,5 @@
 import {z} from 'zod'
-import { UserRole } from '../userInterfaces-Types'
+import { UserRole} from '../userInterfaces-Types'
 
 export const creationUserSchema = z.object( {
     body :  z.object({

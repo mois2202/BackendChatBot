@@ -1,9 +1,9 @@
-import { User, UserWithoutPassword, IUserCreation, IUserRepository } from './userInterfaces-Types';
+import { User, UserWithoutPassword, UserCreation, IUserRepository } from './userInterfaces-Types';
 import UserModel from './userModel';
 
 export default class UserRepository implements IUserRepository {
     
-    async createUser(userDTO: IUserCreation): Promise<UserModel> {
+    async createUser(userDTO: UserCreation): Promise<UserModel> {
     const user = await UserModel.create({
         name: userDTO.name,
         email: userDTO.email,

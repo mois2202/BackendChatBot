@@ -1,12 +1,12 @@
 import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, Unique } from 'sequelize-typescript';
-import { IUser, IUserCreation, UserRole } from './userInterfaces-Types';
+import { User, UserCreation, UserRole } from './userInterfaces-Types';
 
 // Usamos el decorador @Table para indicar que es una tabla de la base de datos
 @Table({
   tableName: 'users',  // Nombre de la tabla en la base de datos
   timestamps: false,   // Si no tienes columnas `createdAt` y `updatedAt`
 })
-class UserModel extends Model<IUser, IUserCreation> implements IUser {
+class UserModel extends Model<User, UserCreation> implements User {
 
   // Definimos el campo `id` como llave primaria
   @PrimaryKey

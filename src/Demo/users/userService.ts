@@ -1,4 +1,4 @@
-import { User, UserWithoutPassword, IUserCreation, IUserRepository, IUserService } from './userInterfaces-Types';
+import { User, UserWithoutPassword, UserCreation, IUserRepository, IUserService } from './userInterfaces-Types';
 
 import UserModel from './userModel';
 
@@ -11,7 +11,7 @@ export default class UserService implements IUserService {
     }
 
     // Servicio para crear un usuario
-    public async createUser(userDTO: IUserCreation): Promise<UserModel> {
+    public async createUser(userDTO: UserCreation): Promise<UserModel> {
         // Aquí puedes añadir lógica adicional como encriptar la contraseña
         // Por ejemplo, bcrypt.hash(userDTO.password, 10)
         return await this.userRepository.createUser(userDTO);

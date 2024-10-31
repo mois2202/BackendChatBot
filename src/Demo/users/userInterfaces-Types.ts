@@ -1,6 +1,4 @@
-import { Optional } from 'sequelize';
 import UserModel from './userModel'
-
 
 // Interfaz completa para manejo interno de la aplicacion
 export type User = {
@@ -24,11 +22,11 @@ export type User = {
 
 
 // Interfaz para manejo de datos opcionales autogenerados por la DB solo en contexto de creacion de registros
-export interface IUserCreation extends Optional<User, 'id' | 'created_at'> {}
+export type UserCreation = Omit<User, 'id' | 'created_at'>;
 
 
 export interface IUserRepository {
-  createUser(userDTO: IUserCreation): Promise<UserModel>;
+  createUser(userDTO: UserCreation): Promise<UserModel>;
   getAllUsersWithoutPassword(): Promise<UserWithoutPassword[]>;
   getUserWithoutPassword(id: number): Promise<UserWithoutPassword | null>;
   updateUser(id: number, updatedData: Partial<User>): Promise<UserModel | null>;
@@ -36,9 +34,10 @@ export interface IUserRepository {
 }
 
 export interface IUserService {
-  createUser(userDTO: IUserCreation): Promise<UserModel>;
+  createUser(userDTO: UserCreation): Promise<UserModel>;
   getAllUsersWithoutPassword(): Promise<UserWithoutPassword[]>;
   getUserWithoutPassword(id: number): Promise<UserWithoutPassword | null>;
   updateUser(id: number, updatedData: Partial<User>): Promise<UserModel | null>;
   deleteUser(id: number): Promise<boolean>;
 }
+

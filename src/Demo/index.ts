@@ -1,6 +1,7 @@
 import express from 'express'
 import sequelize from './shared/db/dbConnection';
 import { demoUserRoutes } from './users/userRoute';
+import { createUserModule } from './users/createUserModule';
 
 const PORT = 3000
 
@@ -9,8 +10,11 @@ const PORT = 3000
 const app = express();
 
 app.use(express.json());
+
+
 app.use('/Demo', demoUserRoutes);
 
+createUserModule();
 
 const main = async () => {
     try {
