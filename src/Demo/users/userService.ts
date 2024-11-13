@@ -1,6 +1,6 @@
 import { User, UserWithoutPassword, UserCreation, IUserRepository, IUserService } from './userInterfaces-Types';
-
 import UserModel from './userModel';
+import bcrypt from 'bcryptjs';
 
 export default class UserService implements IUserService {
     
@@ -12,9 +12,13 @@ export default class UserService implements IUserService {
 
     // Servicio para crear un usuario
     public async createUser(userDTO: UserCreation): Promise<UserModel> {
-        // Aquí puedes añadir lógica adicional como encriptar la contraseña
-        // Por ejemplo, bcrypt.hash(userDTO.password, 10)
-        return await this.userRepository.createUser(userDTO);
+        //Aqui se encripta la contraseña
+        const password = await bcrypt.hash(userDTO.password, 10)
+        const userForCreate = {
+            ...userDTO,
+            password
+        }
+        return await this.userRepository.createUser(userForCreate);
     }
 
     // Servicio para obtener todos los usuarios sin contraseña

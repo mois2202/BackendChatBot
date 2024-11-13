@@ -5,8 +5,6 @@ import { createUserModule } from './users/createUserModule';
 
 const PORT = 3000
 
-
-
 const app = express();
 
 app.use(express.json());
@@ -21,11 +19,14 @@ const main = async () => {
         await sequelize.authenticate();
         console.log("Connection to database established successfully.");
         await sequelize.sync({ alter: true });
+        console.log("Sync succesfully with db and sequalize models.");
     
         app.listen(PORT, () => {
           console.log(`Server is ready on port ${PORT}`);
         });
-      } catch (error) {
+      } 
+      
+      catch (error) {
         console.error('Error during database connection or project execution:', error);
       }
 }
